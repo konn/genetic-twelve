@@ -63,7 +63,7 @@ phraseM :: Rand StdGen Phrase
 phraseM =
   MkPhrase <$> sequence (pure normalOcts)
     <*> sequence (pure $ realToFrac . abs <$> normal 0.5 0.5 (RandGen @StdGen))
-    <*> sequence (pure $ weighted [(Par, 0.8), (Seq, 0.2)])
+    <*> sequence (pure $ weighted [(Seq, 0.8), (Par, 0.2)])
 
 fromPhrase :: ToneRow -> Phrase -> Music Pitch
 fromPhrase tones MkPhrase {timings = V11 seps, ..} =
