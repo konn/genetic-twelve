@@ -18,7 +18,6 @@ import Data.List (foldl1')
 import qualified Data.Vector as V
 import Euterpea
 import GHC.Generics (Generic)
-import Lib
 import System.Random.MWC (Variate (uniformR))
 import System.Random.MWC.Distributions (normal, standard)
 import System.Random.Shuffle (shuffleM)
@@ -63,7 +62,7 @@ phraseM :: Rand StdGen Phrase
 phraseM =
   MkPhrase <$> sequence (pure normalOcts)
     <*> sequence (pure $ realToFrac . abs <$> normal 0.5 0.5 (RandGen @StdGen))
-    <*> sequence (pure $ weighted [(Seq, 0.8), (Par, 0.2)])
+    <*> sequence (pure $ weighted [(Seq, 0.7), (Par, 0.3)])
 
 fromPhrase :: ToneRow -> Phrase -> Music Pitch
 fromPhrase tones MkPhrase {timings = V11 seps, ..} =
@@ -126,7 +125,7 @@ twelveToneWithM = go Nothing
         mkRet = Ret <$> go (Just 2) ((p - 1) / 2)
         mkThen = Then <$> go (Just 3) ((p - 1) / 2) <*> go (Just 4) ((p - 1) / 2)
         mkRepeat = do
-          rep <- floor <$> normal 4.0 0.5 (RandGen @StdGen)
+          rep <- floor <$> normal 2.5 0.75 (RandGen @StdGen)
           Repeat rep <$> go (Just 4) ((p - fromIntegral rep) / 2)
 
 instance Applicative V12 where
@@ -140,6 +139,11 @@ instance Applicative V11 where
 main :: IO ()
 main = do
   pitches <- V12 <$> shuffleM pitches
-  dodeca <- evalRandIO $ twelveToneWithM 15
+  print pitches
+  dodeca <- evalRandIO $ twelveToneWithM 25
   print dodeca
-  play $ tempo 5 $ fromTwelveTones pitches dodeca
+  let music = tempo 5 $ fromTwelveTones pitches dodeca
+  -- play music
+  let performance = perform $ instrument AcousticGrandPiano music
+  exportMidiFile "generated.mid" $ toMidi performance
+  pure ()

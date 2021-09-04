@@ -18,6 +18,20 @@ packages:
       sha256: c9936666afc390560319024c25ecb184e2518ae4d3be5ae14081231091c1f073
   original:
     hackage: PortMidi-0.2.0.0@sha256:0671e36ec72e95138bf396234b205864a8a6d0ee353e09e01cbfd57004c56f40,2383
+- completed:
+    hackage: vector-fft-0.1.0.2@sha256:a40650c3cf6b92f8cc6f7007089d52eaeaa8a150be653ff50fcd911a47d5485b,1576
+    pantry-tree:
+      size: 316
+      sha256: 701b0e8773679671a3704ffbbd4e63f4ecd1566ccfa0d64861deed4dda48c415
+  original:
+    hackage: vector-fft-0.1.0.2
+- completed:
+    hackage: foldl-transduce-0.6.0.1@sha256:228c13ff2010f8003330df98a16ffeddac9149d1370bedf64d56f16013e1944a,2796
+    pantry-tree:
+      size: 618
+      sha256: e416984df264d491b0bb357e52f2a02bb41c7e94f38e4be2f2175fb636d62d56
+  original:
+    hackage: foldl-transduce-0.6.0.1@sha256:228c13ff2010f8003330df98a16ffeddac9149d1370bedf64d56f16013e1944a
 snapshots:
 - completed:
     size: 585817

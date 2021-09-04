@@ -21,12 +21,33 @@ description:         Please see the README on GitHub at <https://github.com/gith
 
 dependencies:
 - base >= 4.7 && < 5
+- array
+- attoparsec
+- attoparsec-binary
+- bytestring
+- conduit
+- conduit-extra
+- monad-loops
+- directory
 - Euterpea
-- vector
-- random
-- random-shuffle
+- filepath
+- foldl
+- foldl-transduce
+- HCodecs
+- integer-logarithms
+- lens
+- massiv
 - MonadRandom
 - mwc-random
+- parallel
+- parsers
+- primitive
+- random
+- random-shuffle
+- vector
+- vector-fft
+ghc-options:
+- -Wall
 
 library:
   source-dirs: src
@@ -35,7 +56,27 @@ executables:
   genetic-twelve-exe:
     main:                Main.hs
     source-dirs:         app
+    other-modules:       []
     ghc-options:
+    - -O1
+    dependencies:
+    - genetic-twelve
+  
+  fft-wav:
+    main: fft-wav.hs
+    other-modules:       []
+    source-dirs:         app
+    ghc-options:
+    - -O2
+    dependencies:
+    - genetic-twelve
+  
+  compare-fft:
+    main: compare-fft.hs
+    other-modules:       []
+    source-dirs:         app
+    ghc-options:
+    - -O2
     - -threaded
     - -rtsopts
     - -with-rtsopts=-N
