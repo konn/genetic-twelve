@@ -30,7 +30,8 @@ data WavDecodeException = FmtChunkNotFound | DataChunkNotFound
   deriving anyclass (Exception)
 
 riffWavC :: MonadThrow m => ConduitT RIFFEvent o m WavFormat
-riffWavC =
+riffWavC = do
+  dropC 1
   await >>= \case
     Just (RIFFChunkHeader "fmt " _) -> do
       takeWhileC (is _RIFFPayload) .| mapC (view _RIFFPayload)

@@ -22,7 +22,6 @@ module Audio.Wav.Format
     getBytesPerSecond,
     getBlockAlign,
     getBitsPerSample,
-    getExtensionSize,
     parseWavFormat,
     renderWavFormatChunk,
   )
@@ -42,7 +41,30 @@ import Type.Reflection (Typeable)
 
 -- | Currently, supports PCM Format only.
 newtype WavFormat = WavFmt_ {fmtPayload :: ShortByteString}
-  deriving (Show, Eq, Ord, Typeable)
+  deriving (Eq, Ord, Typeable)
+
+instance Show WavFormat where
+  showsPrec d wav =
+    showParen (d > 10) $
+      showString "WavPCMFormat {"
+        . showString "formatTag = "
+        . shows (getFormatTag wav)
+        . showString ", "
+        . showString "channels = "
+        . shows (getChannels wav)
+        . showString ", "
+        . showString "sampleRate = "
+        . shows (getSampleRate wav)
+        . showString ", "
+        . showString "bytesPerSecond = "
+        . shows (getBytesPerSecond wav)
+        . showString ", "
+        . showString "blockAlign = "
+        . shows (getBlockAlign wav)
+        . showString ", "
+        . showString "bitsPerSample = "
+        . shows (getBitsPerSample wav)
+        . showString "}"
 
 parseWavFormat :: ByteString -> WavFormat
 parseWavFormat bs
@@ -77,11 +99,7 @@ getBlockAlign = coerce $ readWord16leFrom 12
 
 getBitsPerSample :: WavFormat -> Word16
 {-# INLINE getBitsPerSample #-}
-getBitsPerSample = coerce $ readWord16leFrom 16
-
-getExtensionSize :: WavFormat -> Word16
-{-# INLINE getExtensionSize #-}
-getExtensionSize = coerce $ readWord16leFrom 18
+getBitsPerSample = coerce $ readWord16leFrom 14
 
 instance HasField "formatTag" WavFormat FormatTag where
   getField = getFormatTag
@@ -105,10 +123,6 @@ instance HasField "blockAlign" WavFormat Word16 where
 
 instance HasField "bitsPerSample" WavFormat Word16 where
   getField = getBitsPerSample
-  {-# INLINE getField #-}
-
-instance HasField "extensionSize" WavFormat Word16 where
-  getField = getExtensionSize
   {-# INLINE getField #-}
 
 newtype FormatTag = FormatTag Word16
