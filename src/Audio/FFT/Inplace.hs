@@ -8,6 +8,7 @@ import Control.Monad.Loops (iterateUntilM)
 import Control.Monad.Primitive (PrimMonad (PrimState))
 import Data.Bits (Bits (bit, shiftR))
 import Data.Complex (Complex ((:+)))
+import Data.Ref.Unboxed
 import qualified Data.Vector.Generic as G
 import qualified Data.Vector.Generic.Mutable as MG
 import Data.Vector.Unboxed ()
@@ -30,15 +31,14 @@ simpleFFT = G.modify $ \inps -> do
             (lh, uh) = MG.splitAt half inps
             !dblCos = 2 * c * c - 1
             !dblSin = 2 * s * c
-            !theta = c :+ negate s
+            !w = c :+ s
         go dblCos dblSin lh
         go dblCos dblSin uh
         forM_ [0 .. half - 1] $ \k -> do
           !ek <- MG.read lh k
           !ok <- MG.read uh k
-
-          MG.write inps k $ ek + theta ^ k * ok
-          MG.write inps (half + k) $! ek + theta ^ (half + k) * ok
+          MG.write inps k $ ek + w ^ k * ok
+          MG.write inps (half + k) $! ek + w ^ (half + k) * ok
       where
         !n = MG.length inps
 
