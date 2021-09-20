@@ -26,10 +26,13 @@ source-repository head
 library
   exposed-modules:
       Audio.FFT
+      Audio.FFT.Inplace
       Audio.Wav
       Audio.Wav.Format
       Data.Array.Convert
+      Data.Conduit.Utils
       Data.RIFF
+      Data.RIFF.Types
   other-modules:
       Paths_genetic_twelve
   hs-source-dirs:
@@ -51,6 +54,7 @@ library
     , foldl
     , foldl-transduce
     , integer-logarithms
+    , integer-roots
     , lens
     , massiv
     , monad-loops
@@ -86,6 +90,7 @@ executable compare-fft
     , foldl-transduce
     , genetic-twelve
     , integer-logarithms
+    , integer-roots
     , lens
     , massiv
     , monad-loops
@@ -121,6 +126,7 @@ executable fft-wav
     , foldl-transduce
     , genetic-twelve
     , integer-logarithms
+    , integer-roots
     , lens
     , massiv
     , monad-loops
@@ -156,6 +162,7 @@ executable genetic-twelve-exe
     , foldl-transduce
     , genetic-twelve
     , integer-logarithms
+    , integer-roots
     , lens
     , massiv
     , monad-loops
@@ -194,6 +201,7 @@ test-suite genetic-twelve-test
     , foldl-transduce
     , genetic-twelve
     , integer-logarithms
+    , integer-roots
     , lens
     , massiv
     , monad-loops

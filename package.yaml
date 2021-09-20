@@ -35,6 +35,7 @@ dependencies:
 - foldl-transduce
 - HCodecs
 - integer-logarithms
+- integer-roots
 - lens
 - massiv
 - MonadRandom

@@ -18,5 +18,5 @@ main = do
   [targ] <- getArgs
   runResourceT $ do
     Wav {..} <- readWavFile targ
-    liftIO $ print wavFormat
+    runConduit $ wavData .| mapM_C (liftIO . print)
     pure ()

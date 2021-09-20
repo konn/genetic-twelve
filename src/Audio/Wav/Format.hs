@@ -5,9 +5,18 @@
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE ViewPatterns #-}
 
 module Audio.Wav.Format
-  ( WavFormat,
+  ( WavFormat
+      ( WavPCMFormat,
+        formatTag,
+        channels,
+        sampleRate,
+        bytesPerSecond,
+        blockAlign,
+        bitsPerSample
+      ),
     FormatTag
       ( WAVE_FORMAT_PCM,
         WAVE_FORMAT_IEEE_FLOAT,
@@ -27,6 +36,7 @@ module Audio.Wav.Format
   )
 where
 
+import Control.Arrow ((&&&))
 import Data.Bits (Bits (shiftL), (.|.))
 import Data.ByteString (ByteString)
 import qualified Data.ByteString as BS
@@ -65,6 +75,28 @@ instance Show WavFormat where
         . showString "bitsPerSample = "
         . shows (getBitsPerSample wav)
         . showString "}"
+
+pattern WavPCMFormat ::
+  FormatTag ->
+  Word16 ->
+  Word32 ->
+  Word32 ->
+  Word16 ->
+  Word16 ->
+  WavFormat
+pattern WavPCMFormat
+  { formatTag
+  , channels
+  , sampleRate
+  , bytesPerSecond
+  , blockAlign
+  , bitsPerSample
+  } <-
+  ( getFormatTag &&& getChannels &&& getSampleRate &&& getBytesPerSecond &&& getBlockAlign &&& getBitsPerSample ->
+      (formatTag, (channels, (sampleRate, (bytesPerSecond, (blockAlign, bitsPerSample)))))
+    )
+
+{-# COMPLETE WavPCMFormat #-}
 
 parseWavFormat :: ByteString -> WavFormat
 parseWavFormat bs
