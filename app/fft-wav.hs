@@ -6,7 +6,7 @@
 module Main where
 
 import Audio.FFT (fftAudio)
-import Audio.FFT.Inplace (simpleFFT)
+import Audio.FFT.Inplace (fftC, simpleFFT)
 import Audio.Wav
 import Codec.Wav (importFile)
 import Conduit
@@ -38,14 +38,13 @@ main = do
     iRef <- liftIO $ newIORef (0 :: Int)
     runConduit $
       wavData
-        .| chunkedVector 16384
-        .| mapC (simpleFFT . U.map (:+ 0))
+        .| fftC 16384
         .| awaitForever \coes -> do
           let builder =
                 ifoldMapOf
-                  vectorTraverse
+                  (vectorTraverse @U.Vector)
                   ( \j c ->
-                      BB.intDec j <> "," <> BB.doubleDec (magnitude c) <> "\n"
+                      BB.intDec j <> "," <> BB.doubleDec c <> "\n"
                   )
                   $ halve coes
           i <- liftIO $ readIORef iRef

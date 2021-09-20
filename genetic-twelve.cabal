@@ -31,6 +31,7 @@ library
       Audio.Wav.Format
       Data.Array.Convert
       Data.Conduit.Utils
+      Data.Ref.Unboxed
       Data.RIFF
       Data.RIFF.Types
   other-modules:
