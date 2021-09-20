@@ -46,7 +46,6 @@ dependencies:
 - random
 - random-shuffle
 - vector
-- vector-fft
 ghc-options:
 - -Wall
 
