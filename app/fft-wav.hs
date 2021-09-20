@@ -5,24 +5,15 @@
 
 module Main where
 
-import Audio.FFT (fftAudio)
-import Audio.FFT.Inplace (fftC, simpleFFT)
+import Audio.FFT.Inplace (fftC)
 import Audio.Wav
-import Codec.Wav (importFile)
 import Conduit
-import Control.Lens (foldMapOf, ifoldMapOf, iforM_)
-import qualified Data.Array.Unboxed as A
-import Data.Audio (Audio (channelNumber, sampleData, sampleRate))
+import Control.Lens (ifoldMapOf)
 import qualified Data.ByteString.Builder as BB
-import Data.Complex
-import Data.Conduit.Utils (chunkedVector)
 import Data.IORef (modifyIORef', newIORef, readIORef)
-import qualified Data.Vector as V
 import qualified Data.Vector.Generic as G
 import Data.Vector.Generic.Lens (vectorTraverse)
 import qualified Data.Vector.Unboxed as U
-import Data.Word (Word8)
-import Math.NumberTheory.Logarithms (intLog2')
 import System.Directory (createDirectoryIfMissing)
 import System.Environment (getArgs)
 import System.IO (IOMode (WriteMode), withFile)
