@@ -33,6 +33,7 @@ library
       Data.Ref.Unboxed
       Data.RIFF
       Data.RIFF.Types
+      Data.ST.DivideConquer
   other-modules:
       Paths_genetic_twelve
   hs-source-dirs:
@@ -42,7 +43,9 @@ library
       Euterpea
     , HCodecs
     , MonadRandom
+    , abstract-par
     , array
+    , async
     , attoparsec
     , attoparsec-binary
     , base >=4.7 && <5
@@ -52,12 +55,11 @@ library
     , directory
     , filepath
     , foldl
-    , foldl-transduce
     , integer-logarithms
     , integer-roots
     , lens
-    , massiv
     , monad-loops
+    , monad-par
     , mwc-random
     , parallel
     , parsers
@@ -71,12 +73,14 @@ executable compare-fft
   main-is: compare-fft.hs
   hs-source-dirs:
       app
-  ghc-options: -Wall -O2 -threaded -rtsopts -with-rtsopts=-N
+  ghc-options: -Wall -O2 -threaded -eventlog -rtsopts -with-rtsopts=-N
   build-depends:
       Euterpea
     , HCodecs
     , MonadRandom
+    , abstract-par
     , array
+    , async
     , attoparsec
     , attoparsec-binary
     , base >=4.7 && <5
@@ -86,13 +90,12 @@ executable compare-fft
     , directory
     , filepath
     , foldl
-    , foldl-transduce
     , genetic-twelve
     , integer-logarithms
     , integer-roots
     , lens
-    , massiv
     , monad-loops
+    , monad-par
     , mwc-random
     , parallel
     , parsers
@@ -106,12 +109,14 @@ executable fft-wav
   main-is: fft-wav.hs
   hs-source-dirs:
       app
-  ghc-options: -Wall -O2
+  ghc-options: -Wall -threaded -eventlog -rtsopts -with-rtsopts=-N
   build-depends:
       Euterpea
     , HCodecs
     , MonadRandom
+    , abstract-par
     , array
+    , async
     , attoparsec
     , attoparsec-binary
     , base >=4.7 && <5
@@ -121,13 +126,12 @@ executable fft-wav
     , directory
     , filepath
     , foldl
-    , foldl-transduce
     , genetic-twelve
     , integer-logarithms
     , integer-roots
     , lens
-    , massiv
     , monad-loops
+    , monad-par
     , mwc-random
     , parallel
     , parsers
@@ -146,7 +150,9 @@ executable genetic-twelve-exe
       Euterpea
     , HCodecs
     , MonadRandom
+    , abstract-par
     , array
+    , async
     , attoparsec
     , attoparsec-binary
     , base >=4.7 && <5
@@ -156,13 +162,12 @@ executable genetic-twelve-exe
     , directory
     , filepath
     , foldl
-    , foldl-transduce
     , genetic-twelve
     , integer-logarithms
     , integer-roots
     , lens
-    , massiv
     , monad-loops
+    , monad-par
     , mwc-random
     , parallel
     , parsers
@@ -184,7 +189,9 @@ test-suite genetic-twelve-test
       Euterpea
     , HCodecs
     , MonadRandom
+    , abstract-par
     , array
+    , async
     , attoparsec
     , attoparsec-binary
     , base >=4.7 && <5
@@ -194,13 +201,12 @@ test-suite genetic-twelve-test
     , directory
     , filepath
     , foldl
-    , foldl-transduce
     , genetic-twelve
     , integer-logarithms
     , integer-roots
     , lens
-    , massiv
     , monad-loops
+    , monad-par
     , mwc-random
     , parallel
     , parsers

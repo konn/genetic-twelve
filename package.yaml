@@ -21,7 +21,9 @@ description:         Please see the README on GitHub at <https://github.com/gith
 
 dependencies:
 - base >= 4.7 && < 5
+- abstract-par
 - array
+- async
 - attoparsec
 - attoparsec-binary
 - bytestring
@@ -32,12 +34,11 @@ dependencies:
 - Euterpea
 - filepath
 - foldl
-- foldl-transduce
 - HCodecs
 - integer-logarithms
 - integer-roots
 - lens
-- massiv
+- monad-par
 - MonadRandom
 - mwc-random
 - parallel
@@ -67,7 +68,10 @@ executables:
     other-modules:       []
     source-dirs:         app
     ghc-options:
-    - -O2
+    - -threaded
+    - -eventlog
+    - -rtsopts
+    - -with-rtsopts=-N
     dependencies:
     - genetic-twelve
   
@@ -78,6 +82,7 @@ executables:
     ghc-options:
     - -O2
     - -threaded
+    - -eventlog
     - -rtsopts
     - -with-rtsopts=-N
     dependencies:

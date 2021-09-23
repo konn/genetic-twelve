@@ -26,8 +26,6 @@ packages:
 extra-deps:
 - Euterpea-2.0.7@sha256:81d583a47d483bf83ac07df7b764138f1aa52a56db4e7c7f685d070dbac4b388,2661
 - PortMidi-0.2.0.0@sha256:0671e36ec72e95138bf396234b205864a8a6d0ee353e09e01cbfd57004c56f40,2383
-- vector-fft-0.1.0.2
-- foldl-transduce-0.6.0.1@sha256:228c13ff2010f8003330df98a16ffeddac9149d1370bedf64d56f16013e1944a
 ghc-options:
   $everything: -haddock
 
