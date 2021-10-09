@@ -46,6 +46,10 @@ dependencies:
 - primitive
 - random
 - random-shuffle
+- exceptions
+- streaming
+- streaming-bytestring
+- streaming-attoparsec
 - vector
 ghc-options:
 - -Wall

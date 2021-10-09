@@ -28,10 +28,14 @@ library
       Audio.FFT.Inplace
       Audio.Wav
       Audio.Wav.Format
+      Audio.Wav.Sample
+      Audio.Wav.Streaming
+      Audio.Wav.Types
       Data.Array.Convert
       Data.Conduit.Utils
       Data.Ref.Unboxed
       Data.RIFF
+      Data.RIFF.Streaming
       Data.RIFF.Types
       Data.ST.DivideConquer
   other-modules:
@@ -53,6 +57,7 @@ library
     , conduit
     , conduit-extra
     , directory
+    , exceptions
     , filepath
     , foldl
     , integer-logarithms
@@ -66,6 +71,9 @@ library
     , primitive
     , random
     , random-shuffle
+    , streaming
+    , streaming-attoparsec
+    , streaming-bytestring
     , vector
   default-language: Haskell2010
 
@@ -88,6 +96,7 @@ executable compare-fft
     , conduit
     , conduit-extra
     , directory
+    , exceptions
     , filepath
     , foldl
     , genetic-twelve
@@ -102,6 +111,9 @@ executable compare-fft
     , primitive
     , random
     , random-shuffle
+    , streaming
+    , streaming-attoparsec
+    , streaming-bytestring
     , vector
   default-language: Haskell2010
 
@@ -124,6 +136,7 @@ executable fft-wav
     , conduit
     , conduit-extra
     , directory
+    , exceptions
     , filepath
     , foldl
     , genetic-twelve
@@ -138,6 +151,9 @@ executable fft-wav
     , primitive
     , random
     , random-shuffle
+    , streaming
+    , streaming-attoparsec
+    , streaming-bytestring
     , vector
   default-language: Haskell2010
 
@@ -160,6 +176,7 @@ executable genetic-twelve-exe
     , conduit
     , conduit-extra
     , directory
+    , exceptions
     , filepath
     , foldl
     , genetic-twelve
@@ -174,6 +191,9 @@ executable genetic-twelve-exe
     , primitive
     , random
     , random-shuffle
+    , streaming
+    , streaming-attoparsec
+    , streaming-bytestring
     , vector
   default-language: Haskell2010
 
@@ -199,6 +219,7 @@ test-suite genetic-twelve-test
     , conduit
     , conduit-extra
     , directory
+    , exceptions
     , filepath
     , foldl
     , genetic-twelve
@@ -213,5 +234,8 @@ test-suite genetic-twelve-test
     , primitive
     , random
     , random-shuffle
+    , streaming
+    , streaming-attoparsec
+    , streaming-bytestring
     , vector
   default-language: Haskell2010
